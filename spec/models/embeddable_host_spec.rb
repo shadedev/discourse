@@ -49,21 +49,34 @@ describe EmbeddableHost do
     expect(eh).not_to be_valid
   end
 
-  describe "allows_embeddable_host" do
+  describe "url_allowed?" do
     let!(:host) { Fabricate(:embeddable_host) }
 
     it 'works as expected' do
-      expect(EmbeddableHost.host_allowed?('http://eviltrout.com')).to eq(true)
-      expect(EmbeddableHost.host_allowed?('https://eviltrout.com')).to eq(true)
-      expect(EmbeddableHost.host_allowed?('https://not-eviltrout.com')).to eq(false)
+      expect(EmbeddableHost.url_allowed?('http://eviltrout.com')).to eq(true)
+      expect(EmbeddableHost.url_allowed?('https://eviltrout.com')).to eq(true)
+      expect(EmbeddableHost.url_allowed?('https://not-eviltrout.com')).to eq(false)
     end
 
     it 'works with multiple hosts' do
       Fabricate(:embeddable_host, host: 'discourse.org')
-      expect(EmbeddableHost.host_allowed?('http://eviltrout.com')).to eq(true)
-      expect(EmbeddableHost.host_allowed?('http://discourse.org')).to eq(true)
+      expect(EmbeddableHost.url_allowed?('http://eviltrout.com')).to eq(true)
+      expect(EmbeddableHost.url_allowed?('http://discourse.org')).to eq(true)
+    end
+  end
+
+  describe "path_whitelist" do
+    it "matches the path" do
+      Fabricate(:embeddable_host, path_whitelist: '^/fp/\d{4}/\d{2}/\d{2}/.*$')
+      expect(EmbeddableHost.url_allowed?('http://eviltrout.com')).to eq(false)
+      expect(EmbeddableHost.url_allowed?('http://eviltrout.com/fp/2016/08/25/test-page')).to eq(true)
     end
 
+    it "respects query parameters" do
+      Fabricate(:embeddable_host, path_whitelist: '^/fp$')
+      expect(EmbeddableHost.url_allowed?('http://eviltrout.com/fp?test=1')).to eq(false)
+      expect(EmbeddableHost.url_allowed?('http://eviltrout.com/fp')).to eq(true)
+    end
   end
 
 end

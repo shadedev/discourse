@@ -298,7 +298,7 @@ et:
   assets_topic_body: "See on püsiteema, nähtav vaid meeskonnale, selle saidi kujunduses kasutatavate piltide ja failide talletamiseks. Ära seda kustuta!\n\n\nTee nii:\n\n\n1. Vasta siia teemasse.\n2. Lae üles kõik pildid, mida soovida kasutada logodena, ikoonidena, vms. (Kasuta üleslaadimise ikooni postituse redaktori tööriistaribal, võid pildid siia ka lohistada või kleepida.)\n3. Postita oma vastus.\n4. Tee üleslaetud pildifailini leiad kas oma uues postituses oleval pildil paremklikates, või postituse muutmise ikooni klikkides ja kopeerides postitusest redaktoris. Kopeeri teed pildifailideni.\n5. Kleebi need teed sättesse [basic settings](/admin/site_settings/category/required).\n\n\nKui soovid lubada einevate failitüüpide üleslaadimist, muuda `authorized_extensions` sättes [file settings](/admin/site_settings/category/files)."
   lounge_welcome:
     title: "Teretulemast Lounge'i"
-    body: |
+    body: |2
 
       Õnnitlused! :confetti_ball:
 
@@ -506,33 +506,45 @@ et:
   archetypes:
     banner:
       title: "Teema Bänneriks"
+  unsubscribe:
+    log_out: "Logi välja"
+  user_api_key:
+    read: "lugemine"
+    read_write: "lugemine ja kirjutamine"
   reports:
     visits:
       xaxis: "Päev"
+      yaxis: "Külastajate arv"
     signups:
       title: "Uued kasutajad"
       xaxis: "Päev"
     profile_views:
+      title: "Kasutaja profiili vaatamisi"
       xaxis: "Päev"
     topics:
       title: "Teemad"
       xaxis: "Päev"
+      yaxis: "Uute teemade arv"
     posts:
       title: "Postitused"
       xaxis: "Päev"
+      yaxis: "Uute postituste arv"
     likes:
       title: "Meeldimisi"
       xaxis: "Päev"
+      yaxis: "Uute meeldimiste arv"
     flags:
       title: "Lipud"
       xaxis: "Päev"
     bookmarks:
       title: "Järjehoidjad"
       xaxis: "Päev"
+      yaxis: "Uute järjehoidjate arv"
     starred:
       xaxis: "Päev"
     users_by_trust_level:
       xaxis: "Usaldustase"
+      yaxis: "Kasutajate arv"
     emails:
       title: "Saadetud kirjad"
       xaxis: "Päev"
@@ -546,6 +558,7 @@ et:
       xaxis: "Päev"
       yaxis: "Sõnumite arv"
     moderator_warning_private_messages:
+      title: "Moderaatori hoiatused"
       xaxis: "Päev"
       yaxis: "Sõnumite arv"
     notify_moderators_private_messages:
@@ -557,6 +570,7 @@ et:
       xaxis: "Päev"
       yaxis: "Sõnumite arv"
     top_referrers:
+      title: "Parimad viitajad"
       xaxis: "Kasutaja"
       num_clicks: "Klikid"
       num_topics: "Teemad"
@@ -573,6 +587,7 @@ et:
     page_view_anon_reqs:
       title: "Anonüümne"
       xaxis: "Päev"
+      yaxis: "Anonüümseid lehevaatamisi"
     page_view_logged_in_reqs:
       title: "Sisse logitud"
       xaxis: "Päev"
@@ -609,6 +624,7 @@ et:
       yaxis: "Kokku"
     mobile_visits:
       xaxis: "Päev"
+      yaxis: "Külastuste arv"
   site_settings:
     min_post_length: "Lühim lubatud postituse pikkus"
     max_post_length: "Maksimaalne lubatud postituse pikkus tähemärkides"
@@ -630,19 +646,34 @@ et:
       subject_template: "Varundamine ebaõnnestus"
     restore_succeeded:
       subject_template: "Taastamine õnnelikult lõpetatud"
-      text_body_template: "Taastamine õnnestus."
     restore_failed:
       subject_template: "Taastamine ebaõnnestus"
     csv_export_failed:
       subject_template: "Andmete eksportimine ebaõnnestus"
+  user_notifications:
+    mailing_list:
+      new_topics: "Uued teemad"
+      topic_updates: "eemade uuendused"
+      view_this_topic: "Vaata seda teemat"
+      back_to_top: "Tagasi üles"
   page_not_found:
+    popular_topics: "Populaarsed"
+    recent_topics: "Viimased"
     see_more: "Veel"
+    search_title: "Otsi sellelt saidilt"
     search_google: "Google"
   terms_of_service:
     title: "Teenuse tingimused"
+  deleted: 'kustutatud'
+  email_log:
+    anonymous_user: "Kasutaja on anonüümne"
+    seen_recently: "Kasutajat nähti hiljuti"
+    message_blank: "sõnum on tühi"
+    body_blank: "sisu on tühi"
   about: "Teave"
   guidelines: "Juhendid"
   privacy: "Privaatsus"
+  edit_this_page: "Muuda seda lehekülge"
   csv_export:
     boolean_yes: "Jah"
     boolean_no: "Ei"
@@ -650,11 +681,75 @@ et:
     title: "Teenuse tingimused"
   privacy_topic:
     title: "Puutumatusnormid"
+  badges:
+    welcome:
+      name: Teretulemast
+    nice_post:
+      name: Mõnus vastus
+    good_post:
+      name: Hea vastus
+    great_post:
+      name: Suurepärane vastus
+    nice_topic:
+      name: Mõnus teema
+    good_topic:
+      name: Hea teema
+    great_topic:
+      name: Suurepärane teema
+    nice_share:
+      name: Mõnus jagmaine
+    good_share:
+      name: Hea jagmaine
+    great_share:
+      name: Suurepärane jagamine
+    first_like:
+      name: Esimene meeldimine
+    first_share:
+      name: Esimene jagamine
+      description: Jagas postitust
+    first_link:
+      name: Esimene viide
+      description: Lisas teise postitusele viite
+    first_quote:
+      name: Esimene tsitaat
+      description: Tsiteeris postitust
+    read_guidelines:
+      name: Luges juhiseid
+    reader:
+      name: Lugeja
+    popular_link:
+      name: Populaarne viide
+    hot_link:
+      name: Kuum viide
+    famous_link:
+      name: Kuulus viide
+    appreciated:
+      name: Hinnatud
+    respected:
+      name: Respekteeritud
+    admired:
+      name: Imetletud
+    out_of_love:
+      name: Armastus on otsas
+    higher_love:
+      name: Suurem armastus
+    crazy_in_love:
+      name: Hullult armunud
+    thank_you:
+      name: Tänamine
+    empathetic:
+      name: Empaatiline
+    first_emoji:
+      name: Esimene emotikon
+    first_mention:
+      name: Esimene mainimine
   admin_login:
     success: "Kiri saadetud"
     error: "Viga!"
     email_input: "Admini kiri"
     submit_button: "Saada kiri"
+  tags:
+    title: "Sildid"
   activemodel:
     errors:
       <<: *errors

@@ -74,9 +74,6 @@ en:
         x_seconds:
           one:   "1s"
           other: "%{count}s"
-        less_than_x_minutes:
-          one:   "< 1m"
-          other: "< %{count}m"
         x_minutes:
           one:   "1m"
           other: "%{count}m"
@@ -168,6 +165,7 @@ en:
 
     topic_admin_menu: "topic admin actions"
 
+    wizard_required: "It's time to configure your forum! <a href='%{url}' data-auto-route='true'>Start the Setup Wizard</a>!"
     emails_are_disabled: "All outgoing email has been globally disabled by an administrator. No email notifications of any kind will be sent."
 
     bootstrap_mode_enabled: "To make launching your new site easier, you are in bootstrap mode. All new users will be granted trust level 1 and have daily email digest updates enabled. This will be automatically turned off when total user count exceeds %{min_users} users."
@@ -458,14 +456,12 @@ en:
       latest_by: "latest by"
       toggle_ordering: "toggle ordering control"
       subcategories: "Subcategories"
-      topic_stats: "The number of new topics."
+      topic_sentence:
+        one: "1 topic"
+        other: "%{count} topics"
       topic_stat_sentence:
         one: "%{count} new topic in the past %{unit}."
         other: "%{count} new topics in the past %{unit}."
-      post_stats: "The number of new posts."
-      post_stat_sentence:
-        one: "%{count} new post in the past %{unit}."
-        other: "%{count} new posts in the past %{unit}."
 
     ip_lookup:
       title: IP Address Lookup
@@ -892,6 +888,8 @@ en:
 
     learn_more: "learn more..."
 
+    all_time: 'total'
+    all_time_desc: 'total topics created'
     year: 'year'
     year_desc: 'topics created in the last 365 days'
     month: 'month'
@@ -1012,6 +1010,11 @@ en:
       twitter: "Twitter"
       emoji_one: "Emoji One"
       win10: "Win10"
+
+    category_page_style:
+      categories_only: "Categories Only"
+      categories_with_featured_topics: "Categories with Featured Topics"
+      categories_and_latest_topics: "Categories and Latest Topics"
 
     shortcut_modifier_key:
       shift: 'Shift'
@@ -1221,6 +1224,7 @@ en:
     current_user: 'go to your user page'
 
     topics:
+      new_messages_marker: "last visit"
       bulk:
         unlist_topics: "Unlist Topics"
         reset_read: "Reset Read"
@@ -2402,7 +2406,14 @@ en:
         add_owners: Add owners
         incoming_email: "Custom incoming email address"
         incoming_email_placeholder: "enter email address"
-
+        flair_url: "Avatar Flair Image"
+        flair_url_placeholder: "(Optional) Image URL or Font Awesome class"
+        flair_bg_color: "Avatar Flair Background Color"
+        flair_bg_color_placeholder: "(Optional) Hex color value"
+        flair_color: "Avatar Flair Color"
+        flair_color_placeholder: "(Optional) Hex color value"
+        flair_preview: "Preview"
+        flair_note: "Note: Flair will only show for a user's primary group."
 
       api:
         generate_master: "Generate Master API Key"
@@ -2419,6 +2430,76 @@ en:
         all_users: "All Users"
         note_html: "Keep this key <strong>secret</strong>, all users that have it may create arbitrary posts as any user."
 
+      web_hooks:
+        title: "Webhooks"
+        none: "There are no webhooks right now."
+        instruction: "Webhooks allows Discourse to notify external services when certain event happens in your site. When the webhook is triggered, a POST request will send to URLs provided."
+        detailed_instruction: "A POST request will be sent to provided URL when chosen event happens."
+        new: "New Webhook"
+        create: "Create"
+        save: "Save"
+        destroy: "Delete"
+        description: "Description"
+        controls: "Controls"
+        go_back: "Back to list"
+        payload_url: "Payload URL"
+        payload_url_placeholder: "https://example.com/postreceive"
+        warn_local_payload_url: "It seems you are trying to set up the webhook to a local url. Event delivered to a local address may cause side-effect or unexpected behaviours. Continue?"
+        secret_invalid: "Secret must not have any blank characters."
+        secret_too_short: "Secret should be at least 12 characters."
+        secret_placeholder: "A optional string, used for generating signature"
+        event_type_missing: "You need to set up at least one event type."
+        content_type: "Content Type"
+        secret: "Secret"
+        event_chooser: "Which events would you like to trigger this webhook?"
+        wildcard_event: "Send me everything."
+        individual_event: "Select individual events."
+        verify_certificate: "Check TLS certificate of payload url"
+        active: "Active"
+        active_notice: "We will deliver event details when it happens."
+        categories_filter_instructions: "Relevant webhooks will only be triggered if the event is related with specified categories. Leave blank to trigger webhooks for all categories."
+        categories_filter: "Triggered Categories"
+        groups_filter_instructions: "Relevant webhooks will only be triggered if the event is related with specified groups. Leave blank to trigger webhooks for all groups."
+        groups_filter: "Triggered Groups"
+        delete_confirm: "Delete this webhook?"
+        topic_event:
+          name: "Topic Event"
+          details: "When there is a new topic, revised, changed or deleted."
+        post_event:
+          name: "Post Event"
+          details: "When there is a new reply, edit, deleted or recovered."
+        user_event:
+          name: "User Event"
+          details: "When a user is created or approved."
+        delivery_status:
+          title: "Delivery Status"
+          inactive: "Inactive"
+          failed: "Failed"
+          successful: "Successful"
+        events:
+          none: "There are no related events."
+          redeliver: "Redeliver"
+          incoming:
+            one: "There is a new event."
+            other: "There are {{count}} new events."
+          completed_in:
+            one: "Completed in 1 second."
+            other: "Completed in {{count}} seconds."
+          request: "Request"
+          response: "Response"
+          redeliver_confirm: "Are you sure you want to redeliver the same payload?"
+          headers: "Headers"
+          payload: "Payload"
+          body: "Body"
+          go_list: "Go to list"
+          go_details: "Edit webhook"
+          go_events: "Go to events"
+          ping: "Ping"
+          status: "Status Code"
+          event_id: "ID"
+          timestamp: "Created"
+          completion: "Completion Time"
+          actions: "Actions"
       plugins:
         title: "Plugins"
         installed: "Installed Plugins"
@@ -3108,6 +3189,7 @@ en:
         sample: "Use the following HTML code into your site to create and embed discourse topics. Replace <b>REPLACE_ME</b> with the canonical URL of the page you are embedding it on."
         title: "Embedding"
         host: "Allowed Hosts"
+        path_whitelist: "Path Whitelist"
         edit: "edit"
         category: "Post to Category"
         add_host: "Add Host"
@@ -3120,6 +3202,7 @@ en:
         embed_by_username: "Username for topic creation"
         embed_post_limit: "Maximum number of posts to embed"
         embed_username_key_from_feed: "Key to pull discourse username from feed"
+        embed_title_scrubber: "Regular expression used to scrub the title of posts"
         embed_truncate: "Truncate the embedded posts"
         embed_whitelist_selector: "CSS selector for elements that are allowed in embeds"
         embed_blacklist_selector: "CSS selector for elements that are removed from embeds"
@@ -3144,5 +3227,26 @@ en:
           add: "Add"
           filter: "Search (URL or External URL)"
 
-# WARNING! Keys added here will be in the admin_js section.
-#          Keys that don't belong in admin should be placed earlier in the file.
+  wizard_js:
+    wizard:
+      done: "Done"
+      back: "Back"
+      next: "Next"
+      step: "%{current} of %{total}"
+      upload: "Upload"
+      uploading: "Uploading..."
+      quit: "Maybe Later"
+
+      staff_count:
+        one: "Your community has 1 staff member. "
+        other: "Your community has %{count} staff members."
+
+      invites:
+        add_user: "add"
+        none_added: "You haven’t invited any staff. Are you sure you want to continue?"
+        roles:
+          admin: "Admin"
+          moderator: "Moderator"
+          regular: "Regular User"
+
+

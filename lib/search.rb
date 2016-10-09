@@ -436,6 +436,9 @@ class Search
         elsif word == 'in:private'
           @search_pms = true
           nil
+        elsif word =~ /^private_messages:(.+)$/
+          @search_pms = true
+          nil
         else
           found ? nil : word
         end
@@ -660,7 +663,7 @@ class Search
     def self.ts_query(term, locale = nil, joiner = "&")
 
       data = Post.exec_sql("SELECT to_tsvector(:locale, :term)",
-                            locale: locale || long_locale,
+                            locale: 'simple',
                             term: term
                           ).values[0][0]
 
